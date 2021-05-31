@@ -41,7 +41,6 @@ class RecipeListActivity : AppCompatActivity() {
         }
         binding.adapter = recipesAdapter
         viewModel.recipeList.observe(this, Observer {
-
             val list = it.results
             recipesAdapter.submitList(list)
         })

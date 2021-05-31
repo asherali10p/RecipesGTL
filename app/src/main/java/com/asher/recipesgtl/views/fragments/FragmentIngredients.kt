@@ -16,8 +16,6 @@ class FragmentIngredients : Fragment(){
 
 
     private var _binding: FragmentIngredientsBinding? = null
-    // This property is only valid between onCreateView and
-// onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -40,8 +38,6 @@ class FragmentIngredients : Fragment(){
 
 
         model.recipeDetails.observe(viewLifecycleOwner, { item ->
-            // Update the UI
-
             binding.recipeDetails =item
         })
     }

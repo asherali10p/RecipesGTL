@@ -8,7 +8,7 @@ import com.asher.recipesgtl.views.fragments.FragmentInstructions
 import com.asher.recipesgtl.views.fragments.FragmentSummary
 
 
-class RecipeDetailsAdapter(fragmentActivity: FragmentActivity, titles: List<String>) :
+class RecipeDetailsAdapter(fragmentActivity: FragmentActivity) :
     FragmentStateAdapter(fragmentActivity) {
 
     override fun createFragment(position: Int): Fragment {

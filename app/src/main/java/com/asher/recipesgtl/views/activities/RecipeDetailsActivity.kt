@@ -28,11 +28,8 @@ class RecipeDetailsActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         getExtras()
 
-        binding.viewPager.adapter = RecipeDetailsAdapter(this,titles)
+        binding.viewPager.adapter = RecipeDetailsAdapter(this)
 
-        // attaching tab mediator
-
-        // attaching tab mediator
         TabLayoutMediator(binding.tabLayout, binding.viewPager) {
                 tab: TabLayout.Tab, position: Int ->
             tab.setText(titles.get(position)) }.attach()
