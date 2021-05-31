@@ -1,0 +1,2 @@
+rootProject.name = "RecipesGTL"
+include ':app'
