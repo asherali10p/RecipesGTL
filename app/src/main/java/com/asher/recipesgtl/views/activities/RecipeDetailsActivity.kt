@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.asher.recipesgtl.R
-import com.asher.recipesgtl.adapters.ViewPagerFragmentAdapter
+import com.asher.recipesgtl.adapters.RecipeDetailsAdapter
 import com.asher.recipesgtl.databinding.ActivityRecipeDetailsBinding
 import com.asher.recipesgtl.viewmodels.RecipeDetailsViewModel
 import com.google.android.material.tabs.TabLayout
@@ -28,7 +28,7 @@ class RecipeDetailsActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         getExtras()
 
-        binding.viewPager.adapter = ViewPagerFragmentAdapter(this,titles)
+        binding.viewPager.adapter = RecipeDetailsAdapter(this,titles)
 
         // attaching tab mediator
 
@@ -38,7 +38,7 @@ class RecipeDetailsActivity : AppCompatActivity() {
             tab.setText(titles.get(position)) }.attach()
 
         viewModel.recipeDetails.observe(this, Observer {
-            Log.e("RecipeListActivity", it.toString())
+
         })
     }
 

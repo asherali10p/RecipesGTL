@@ -2,6 +2,7 @@ package com.asher.recipesgtl.repositories
 
 import com.asher.recipesgtl.constants.API_KEY
 import com.asher.recipesgtl.db.dao.RecipeDAO
+import com.asher.recipesgtl.helpers.getPastDaysMillis
 import com.asher.recipesgtl.models.RecipeDetails
 import com.asher.recipesgtl.models.Recipes
 import com.asher.recipesgtl.services.RecipesWebService
@@ -25,35 +26,18 @@ class RecipeRepositoryImpl @Inject constructor(
     override suspend fun getRecipeById(recipe_id: Long): RecipeDetails? {
 
         return withContext(Dispatchers.IO) {
-            val recipe = recipeDAO.hasRecipe(recipe_id, FRESH_TIMEOUT)
-            if (recipe) {
+
+            val hasRecipe = recipeDAO.hasRecipe(recipe_id, getPastDaysMillis(7))
+            if (hasRecipe) {
                 return@withContext recipeDAO.getRecipeById(recipe_id)
             }
             val fetchedRecipe = recipesWebService.getRecipeDetails(recipe_id, API_KEY)
             if (fetchedRecipe != null) {
-                // recipeDAO.insertOne(fetchedRecipe)
+                 recipeDAO.insertOne(fetchedRecipe)
 
             }
             return@withContext fetchedRecipe
         }
-
-        /*val recipe = recipeDAO.hasRecipe(recipe_id, FRESH_TIMEOUT)
-        if (recipe) {
-            return recipeDAO.getRecipeById(recipe_id)
-        }
-        return withContext(Dispatchers.IO) {
-
-            val response = recipesWebService.getRecipeDetails(recipe_id, API_KEY)
-            if (response != null) {
-                // recipeDAO.insertOne(response)
-                return@withContext response
-            }
-            return@withContext null
-        }*/
-
         }
 
-    companion object {
-        val FRESH_TIMEOUT = TimeUnit.DAYS.toMillis(7)
-    }
 }

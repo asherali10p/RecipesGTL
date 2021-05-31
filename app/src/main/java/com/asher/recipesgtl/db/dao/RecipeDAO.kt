@@ -13,18 +13,18 @@ interface RecipeDAO {
     @Query("SELECT * FROM recipe_details WHERE id = :recipeId")
     fun getRecipeById(recipeId: Long): RecipeDetails?
 
-    /*@Query("SELECT * FROM recipe_details")
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertOne(recipeDetails: RecipeDetails)
+
+    @Query("SELECT * FROM recipe_details")
     fun getAll(): List<RecipeDetails>
 
     @Query("SELECT * FROM recipe_details WHERE title LIKE :title")
-    fun findByTitle(title: String): List<RecipeDetails>*/
+    fun findByTitle(title: String): List<RecipeDetails>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOne(recipeDetails: RecipeDetails)
-
-    /*@Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAll(recipeDetailsList: List<RecipeDetails>)
 
     @Delete
-    fun delete(recipeDetails: RecipeDetails)*/
+    fun delete(recipeDetails: RecipeDetails)
 }

@@ -48,7 +48,7 @@ class FragmentSummary :Fragment(){
 
         model.recipeDetails.observe(viewLifecycleOwner, { item ->
             // Update the UI
-            Log.e("RecipeListActivity", item.toString())
+
             binding.recipeDetails =item
         })
     }
